@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[From zero to Developer]]></title>
+  <link href="http://SeeThruHead.github.io/atom.xml" rel="self"/>
+  <link href="http://SeeThruHead.github.io/"/>
+  <updated>2014-09-25T15:01:56-04:00</updated>
+  <id>http://SeeThruHead.github.io/</id>
+  <author>
+    <name><![CDATA[Shane Keulen]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Tools of the Trade]]></title>
+    <link href="http://SeeThruHead.github.io/blog/2014/09/18/tools-of-the-trade/"/>
+    <updated>2014-09-18T18:25:24-04:00</updated>
+    <id>http://SeeThruHead.github.io/blog/2014/09/18/tools-of-the-trade</id>
+    <content type="html"><![CDATA[<p>So day four just wrapped up at <a href="https://twitter.com/hackeryou">@HackerYou</a> and because I was fortunate enough to have taken the part-time course previously most of the lessons have been review. So I spent most of the time fiddling around with tooling. Today I focused my efforts on adding some customizations to Sublime and devtools and fixing a few annoyances that have come up in class.</p>
+
+<h3>Devtools</h3>
+
+<p>I recently ran across a tweet from <a href="https://twitter.com/pixelpurity/status/502225973295992832">@pixelpurity</a> showing off a matching inspector and sublime text. But when I set out to recreate it I ran into a few issues. My researching took me to <a href="http://darcyclarke.me/">Darcy Clarke&rsquo;s blog</a> where he outlined how to do it. Unfortunately the feature has since been removed. You can now only load custom css for the Chrome inspector via a chrome extension. Now I couldn&rsquo;t find (still can&rsquo;t actually) the base16-eighties-dark theme as a chrome extension but I did find a tool that could help build one.</p>
+
+<!-- more -->
+
+
+<p>It&rsquo;s a wonderful little less project compiled with grunt that builds the extension folder for you. It&rsquo;s called <a href="https://github.com/mauricecruz/zero-base-themes">Zero-Base-Themes by Maurice Cruz</a>. Now this tool is awesome because it organizes all of the color variables into seperate theme files, and then you specify which theme file you want to use in the config.less and run grunt and a ready to go extension folder is created. You can then go into chrome://extensions, click the developer checkbox and load that directory using &ldquo;Load unpacked extension&hellip;&rdquo; The only problem is I don&rsquo;t really know which variable in the theme files correspond to what in the inspector, but I&rsquo;m sure countless hours of fiddling will reveal the knowledge.</p>
+
+<h3>Sublime</h3>
+
+<p>I&rsquo;ve stumbled across a number of things I didn&rsquo;t know about sublime this week.</p>
+
+<p>First off is the ability to filter your tab completions. You add filters by using the pipe <code>|</code> character after your emmet shorthand and then passing it a flag that corresponds to a filter. A list of filters and explanation of there use can be found <a href="http://docs.emmet.io/filters/">here</a>
+Now let&rsquo;s say you were to type <code>.outerWrapper&gt;.innerWrapper&gt;header&gt;nav</code> and then added <code>|c</code> after it and hit tab. You would be applying the &ldquo;comment tags&rdquo; filter that&rsquo;s incredibly useful in helping to avoid div soup.
+This:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>.outerWrapper&gt;.innerWrapper&gt;header&gt;nav|c</span></code></pre></td></tr></table></div></figure>
+
+
+<p>becomes this:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='HTML'><span class='line'><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;outerWrapper&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>      <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;innerWrapper&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>          <span class="nt">&lt;header&gt;</span>
+</span><span class='line'>              <span class="nt">&lt;nav&gt;&lt;/nav&gt;</span>
+</span><span class='line'>          <span class="nt">&lt;/header&gt;</span>
+</span><span class='line'>      <span class="nt">&lt;/div&gt;</span>
+</span><span class='line'>      <span class="c">&lt;!-- /.innerWrapper --&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;/div&gt;</span>
+</span><span class='line'>  <span class="c">&lt;!-- /.outerWrapper --&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>You can enable this functionality by default so you don&rsquo;t have to to type <code>|c</code> all the time by going into <code>Preferences -&gt; Package Settings -&gt; Emmet -&gt; Settings - User</code> and adding</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='json'><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="nt">&quot;syntaxProfiles&quot;</span><span class="p">:</span> <span class="p">{</span>
+</span><span class='line'>      <span class="nt">&quot;html&quot;</span> <span class="p">:</span> <span class="p">{</span>
+</span><span class='line'>          <span class="nt">&quot;filters&quot;</span> <span class="p">:</span> <span class="s2">&quot;html, c&quot;</span>
+</span><span class='line'>      <span class="p">}</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now <a href="https://twitter.com/brnnbrn">Brenna</a> (our teacher) mentioned that she preferred closing comments on the same line as the closing tag. Realizing that I agreed with her I set out to find a way to make that happen, and after a while of searching google I found this <a href="http://iaintnoextra.tumblr.com/post/68089741466/automatically-add-closing-comments-to-html-using-emmet">post</a> by Christopher G. Herbert showing how to do it. All you have to do is add another little bit of JSON to your emmet settings - user file:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='json'><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="nt">&quot;preferences&quot;</span><span class="p">:</span> <span class="p">{</span>
+</span><span class='line'>      <span class="nt">&quot;filter.commentAfter&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;!-- /&lt;%= attr(\&quot;id\&quot;, \&quot;#\&quot;) %&gt;&lt;%= attr(\&quot;class\&quot;, \&quot;.\&quot;) %&gt; --&gt;&quot;</span>
+</span><span class='line'>  <span class="p">},</span>
+</span><span class='line'>  <span class="nt">&quot;syntaxProfiles&quot;</span><span class="p">:</span> <span class="p">{</span>
+</span><span class='line'>      <span class="nt">&quot;html&quot;</span> <span class="p">:</span> <span class="p">{</span>
+</span><span class='line'>          <span class="nt">&quot;filters&quot;</span> <span class="p">:</span> <span class="s2">&quot;html, c&quot;</span>
+</span><span class='line'>      <span class="p">}</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><a href="http://www.sitepoint.com/faster-workflow-mastering-emmet-part-4/">Now lastly I stumbled across another really neat emmet trick: control + shift + enter</a></p>
+
+<p>If you select a list of items on their own lines like:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Home
+</span><span class='line'>About
+</span><span class='line'>Portfolio
+</span><span class='line'>Contact</span></code></pre></td></tr></table></div></figure>
+
+
+<p>And then hit Control + Alt + Enter you&rsquo;ll get a little dialog box like you would with Control + W. You can then enter a chain of emmet abbreviations and whichever element you append an <code>*</code> to will be generated around each line. (Click the link above for a beautiful animated gif of it in action).</p>
+
+<p>Now to make things even crazier you can refer to the contents of each line by using <code>$#</code> which makes it possible to do some really crazy stuff if you know what you&rsquo;re doing.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>nav&gt;ul&gt;li[title=$#]*&gt;a[href=$#.html]{$#}&gt;img[src=$#.png alt="$#"].nav-bg</span></code></pre></td></tr></table></div></figure>
+
+
+<p>becoming</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;nav&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;ul&gt;</span>
+</span><span class='line'>      <span class="nt">&lt;li</span> <span class="na">title=</span><span class="s">&quot;Home&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>          <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;Home.html&quot;</span><span class="nt">&gt;</span>Home
+</span><span class='line'>          <span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">&quot;Home.png&quot;</span> <span class="na">alt=</span><span class="s">&quot;Home&quot;</span> <span class="na">class=</span><span class="s">&quot;nav-bg&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>          <span class="nt">&lt;/a&gt;</span>
+</span><span class='line'>      <span class="nt">&lt;/li&gt;</span>
+</span><span class='line'>      <span class="nt">&lt;li</span> <span class="na">title=</span><span class="s">&quot;About&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>          <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;About.html&quot;</span><span class="nt">&gt;</span>About
+</span><span class='line'>          <span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">&quot;About.png&quot;</span> <span class="na">alt=</span><span class="s">&quot;About&quot;</span> <span class="na">class=</span><span class="s">&quot;nav-bg&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>          <span class="nt">&lt;/a&gt;</span>
+</span><span class='line'>      <span class="nt">&lt;/li&gt;</span>
+</span><span class='line'>      <span class="nt">&lt;li</span> <span class="na">title=</span><span class="s">&quot;Portfolio&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>          <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;Portfolio.html&quot;</span><span class="nt">&gt;</span>Portfolio
+</span><span class='line'>          <span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">&quot;Portfolio.png&quot;</span> <span class="na">alt=</span><span class="s">&quot;Portfolio&quot;</span> <span class="na">class=</span><span class="s">&quot;nav-bg&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>          <span class="nt">&lt;/a&gt;</span>
+</span><span class='line'>      <span class="nt">&lt;/li&gt;</span>
+</span><span class='line'>      <span class="nt">&lt;li</span> <span class="na">title=</span><span class="s">&quot;Contact&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>          <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;Contact.html&quot;</span><span class="nt">&gt;</span>Contact
+</span><span class='line'>          <span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">&quot;Contact.png&quot;</span> <span class="na">alt=</span><span class="s">&quot;Contact&quot;</span> <span class="na">class=</span><span class="s">&quot;nav-bg&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>          <span class="nt">&lt;/a&gt;</span>
+</span><span class='line'>      <span class="nt">&lt;/li&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;/ul&gt;</span>
+</span><span class='line'><span class="nt">&lt;/nav&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>is really just kind of nuts, isn&rsquo;t it?</p>
+
+<p>I think I probably spend way too much time fiddling with tools, but it&rsquo;s just so much fun!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Just One More Sleep]]></title>
+    <link href="http://SeeThruHead.github.io/blog/2014/09/14/just-one-more-sleep/"/>
+    <updated>2014-09-14T23:38:03-04:00</updated>
+    <id>http://SeeThruHead.github.io/blog/2014/09/14/just-one-more-sleep</id>
+    <content type="html"><![CDATA[<p>Wow, It&rsquo;s finally here. When I leave the house tomorrow it won&rsquo;t be to slog out another 8 hour day serving shitty drinks to degenerates. Tomorrow I start a full time immersive Front-End bootcamp at <a href="https://twitter.com/hackeryou">@HackerYou</a>. It&rsquo;s hard to believe this is actually happening. It may sound like I&rsquo;m overhyping it, or just overly excited. But if someone had asked me what my life plan was 6 months ago I wouldn&rsquo;t of had an answer for them. University is far too expensive and I feel like college is worth so little that it doesn&rsquo;t justify the amount of time put into it. I really had no idea how I was going to gain the knowledge needed to pursue a fulfilling career.</p>
+
+<p>So it suffices to say that I&rsquo;m incredibly excited. (I&rsquo;ve probably mentioned this in every blog post so far haven&rsquo;t I&hellip;)</p>
+
+<p>I really can&rsquo;t wait to meet my new instructors and to see the instructors/mentors from my part time class again. Just the thought of spending 8 hours a day in class with people as determined as I am to learn something new is a refreshing thought when compared to how I&rsquo;ve spent most of my days over the past few years.</p>
+
+<!-- more -->
+
+
+<p>Now aside from being excited all week I&rsquo;ve been doing some more reading. I started into a really great book called <a href="http://www.amazon.com/Code-Complete-Practical-Handbook-Construction/dp/0735619670">Code Complete</a> by Steve McConnel. I came across this book while searching for a language agnostic programming guide.</p>
+
+<p>I mentioned in a previous post that I&rsquo;d detail some extreme finance tips that are helping me to be able to live on very little money. As most of my money throughout the bootcamp will be going to food one of the most important things you can do is eat on the cheap. For this week I&rsquo;ve been eating my standard Oatmeal + Honey + Fruit in the morning. For dinner I decided to make a stew and literally just made the <a href="http://allrecipes.com/recipe/beef-stew-vi/">first recipe for beef stew</a> that popped up on google. The approximate total cost for a serving of this stew when put on a bed of rice is about 2 dollars. Not bad I think. I&rsquo;d be grateful to hear any tips for eating cheaply that anyone&rsquo;s willing to share.</p>
+
+<p><img class="left" src="http://SeeThruHead.github.io/images/posts/mailgift.jpg" width="400"> On another note I received a surprise in the mail at the beginning of the week. It came at a perfect time as my asus t100 tablet crapped out and basically halted my subway reading altogether. The staff over at HackerYou are incredibly thoughtful.</p>
+
+<p>Now to end off this blog post I&rsquo;m going to link some things that I came across this week. I thought of the idea on Wednesday and started keeping a log of all the articles and videos that I watched (when I remembered to) partly for my own record but more for anyone who wants some interesting to look into.</p>
+
+<ol>
+<li><a href="http://learnwithjeff.com/blog/2012/08/21/how-to-get-a-job-as-a-developer-in-less-than-six-months/">Get a job as a developer in 6 months (LearbwithJeff)</a></li>
+<li><a href="https://www.youtube.com/watch?v=R8W_6xWphtw">Paul Irish - Delivering the Goods</a></li>
+<li><a href="https://www.youtube.com/watch?v=eORqFaf_QzM">Polymer - Interacting with google services with nothing but HTML</a>
+4.<a href="http://code.tutsplus.com/tutorials/the-essentials-of-zeptojs--net-24867">The Essentials of ZeptoJS</a></li>
+<li><a href="https://www.youtube.com/watch?v=Wxmxsw65BQw">ScrollMagic Update, CSS Centering, jQuery Focus Point</a></li>
+<li><a href="https://ind.ie/blog/video-player/">HTML5 Video Player</a></li>
+<li><a href="http://www.sitepoint.com/building-chat-app-node-webkit-firebase-angularjs/">Building a chat app with node-webkit</a></li>
+<li><a href="http://design.tutsplus.com/articles/teach-yourself-graphic-design-a-self-study-course-outline--psd-3520">Teach Yourself Graphic Design</a></li>
+<li><a href="http://web-design-weekly.com/2014/08/03/autopolyfiller/">Autopolyfiller</a></li>
+<li><a href="https://www.wunderlist.com/blog/Landing-your-dream-job/">Landing your dream job</a></li>
+<li><a href="http://www.daedtech.com/how-to-keep-your-best-programmers">How to keep your best programmers</a></li>
+<li><a href="http://www.daedtech.com/how-developers-stop-learning-rise-of-the-expert-beginner">How Devs stop learning</a></li>
+<li><a href="http://simpledeveloper.com/important-skills-self-taught-programmers-lack/">Skills that self-taught programming lack</a></li>
+<li><a href="http://stateofwebtype.com/">State of Web Type</a></li>
+<li><a href="https://speakerdeck.com/patrickhamann/css-and-the-critical-path-cssconfeu-september-2014">CSS and the Critical Path</a></li>
+<li><a href="https://plus.google.com/+AddyOsmani/posts/H3onog42Msj">Recommend javascript Reading</a></li>
+<li><a href="https://the-pastry-box-project.net/garann-means/2014-July-16">The Pastry box Project</a></li>
+</ol>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Who Am I? Why Write This Blog?]]></title>
+    <link href="http://SeeThruHead.github.io/blog/2014/09/10/who-am-i-why-write-this-blog/"/>
+    <updated>2014-09-10T03:55:16-04:00</updated>
+    <id>http://SeeThruHead.github.io/blog/2014/09/10/who-am-i-why-write-this-blog</id>
+    <content type="html"><![CDATA[<p>This post has been a while coming. I&rsquo;ll admit I&rsquo;ve actually been dreading it. I&rsquo;m a terrible writer and have been so incredibly out of practice for so long that the whole idea has been a bit daunting.</p>
+
+<p>Now with that out of the way I suppose I&rsquo;ll move on to the meat of the post. I&rsquo;m a 27 year old Toronto native who&rsquo;s been working in the service industry for about 7 years now. Partly due to my own laziness I&rsquo;ve not really progressed at all in those 7 years. I&rsquo;ve mostly just wasted time.</p>
+
+<p>So I recently made the decision to put it all behind me and take a risk on something new. The first step was to enroll in a <a href="http://www.hackeryou.com">HackerYou</a> part time Intro to HTML &amp; CSS course that I discovered while researching coding bootcamps. I was barely able to afford cost of tution by working at an after hours bar in the city. Let me tell you, I enjoyed that class more than anything I&rsquo;ve done in a long long while. It was easily worth every penny. I came out of it with a decent understanding of HTML and CSS and a hunger to learn more.</p>
+
+<!-- more -->
+
+
+<p>So I decided I was going to get a little more hardcore and quit my job and take the full time immersive bootcamp in September.</p>
+
+<p>From the end of the part-time course until now has been quite stressful and exciting. I&rsquo;ve been focussing on 1. coming up with the money to attend the bootcamp and 2. learning as much as possible before I get there. For the money part I&rsquo;ve basically finally started to become even remotely responsible with my money. That means no more eating out at restauraunts or movies or the like. I also sold almost everything I&rsquo;ve accumulated over the years. I&rsquo;m almost just down to my bicycle and a macbook. I leave home every day with no money and no debit/credit cards in my wallet just to make sure I don&rsquo;t waste any money.</p>
+
+<p>As for the learning I&rsquo;ve read Design for Hackers, The Design of Everyday Things, Sass for Web Designers, Eloquent Javascript (Up until the functional programming section), Javascript the Good Parts (first few chapters). Aside from books I&rsquo;ve been digging into blogs and posts on twitter from the likes of Drew Minns, Wes Bos, Chris Coyier, Paul Irish, Addy Osmani, Sara Soueidan, Ben Schwarz and many others. Hopefully I&rsquo;ve done enough preparation.</p>
+
+<p>Now the purpose for the blog is going to be varied. Foremost to document my journey from dead end job to fulfilling career. A little bit about finances and how I&rsquo;m managing to live/eat for very litte money. And likely a lot of just straight coding talk. I really want to talk about what I&rsquo;ve learned and am going to be learning throughout this process.</p>
+
+<p>Class starts on Monday and I couldn&rsquo;t be more excited.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[My First Blog Post With Octopress!]]></title>
+    <link href="http://SeeThruHead.github.io/blog/2014/08/28/my-first-blog-post-with-octopress/"/>
+    <updated>2014-08-28T16:03:09-04:00</updated>
+    <id>http://SeeThruHead.github.io/blog/2014/08/28/my-first-blog-post-with-octopress</id>
+    <content type="html"><![CDATA[<p>Hello everyone! This is my first post testing out Octopress. I picked Octopress because it seems like exactly what I wanted, a very low hassle static blog generator. Stay tuned there will be many more posts to come.</p>
+]]></content>
+  </entry>
+  
+</feed>
