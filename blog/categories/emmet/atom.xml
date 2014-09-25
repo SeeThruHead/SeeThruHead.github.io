@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Emmet | From zero to Developer]]></title>
+  <link href="http://SeeThruHead.github.io/blog/categories/emmet/atom.xml" rel="self"/>
+  <link href="http://SeeThruHead.github.io/"/>
+  <updated>2014-09-25T15:06:00-04:00</updated>
+  <id>http://SeeThruHead.github.io/</id>
+  <author>
+    <name><![CDATA[Shane Keulen]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Tools of the Trade]]></title>
+    <link href="http://SeeThruHead.github.io/blog/2014/09/18/tools-of-the-trade/"/>
+    <updated>2014-09-18T18:25:24-04:00</updated>
+    <id>http://SeeThruHead.github.io/blog/2014/09/18/tools-of-the-trade</id>
+    <content type="html"><![CDATA[<p>So day four just wrapped up at <a href="https://twitter.com/hackeryou">@HackerYou</a> and because I was fortunate enough to have taken the part-time course previously most of the lessons have been review. So I spent most of the time fiddling around with tooling. Today I focused my efforts on adding some customizations to Sublime and devtools and fixing a few annoyances that have come up in class.</p>
+
+<h3>Devtools</h3>
+
+<p>I recently ran across a tweet from <a href="https://twitter.com/pixelpurity/status/502225973295992832">@pixelpurity</a> showing off a matching inspector and sublime text. But when I set out to recreate it I ran into a few issues. My researching took me to <a href="http://darcyclarke.me/">Darcy Clarke&rsquo;s blog</a> where he outlined how to do it. Unfortunately the feature has since been removed. You can now only load custom css for the Chrome inspector via a chrome extension. Now I couldn&rsquo;t find (still can&rsquo;t actually) the base16-eighties-dark theme as a chrome extension but I did find a tool that could help build one.</p>
+
+<!-- more -->
+
+
+<p>It&rsquo;s a wonderful little less project compiled with grunt that builds the extension folder for you. It&rsquo;s called <a href="https://github.com/mauricecruz/zero-base-themes">Zero-Base-Themes by Maurice Cruz</a>. Now this tool is awesome because it organizes all of the color variables into seperate theme files, and then you specify which theme file you want to use in the config.less and run grunt and a ready to go extension folder is created. You can then go into chrome://extensions, click the developer checkbox and load that directory using &ldquo;Load unpacked extension&hellip;&rdquo; The only problem is I don&rsquo;t really know which variable in the theme files correspond to what in the inspector, but I&rsquo;m sure countless hours of fiddling will reveal the knowledge.</p>
+
+<h3>Sublime</h3>
+
+<p>I&rsquo;ve stumbled across a number of things I didn&rsquo;t know about sublime this week.</p>
+
+<p>First off is the ability to filter your tab completions. You add filters by using the pipe <code>|</code> character after your emmet shorthand and then passing it a flag that corresponds to a filter. A list of filters and explanation of there use can be found <a href="http://docs.emmet.io/filters/">here</a>
+Now let&rsquo;s say you were to type <code>.outerWrapper&gt;.innerWrapper&gt;header&gt;nav</code> and then added <code>|c</code> after it and hit tab. You would be applying the &ldquo;comment tags&rdquo; filter that&rsquo;s incredibly useful in helping to avoid div soup.
+This:
+<code>
+.outerWrapper&gt;.innerWrapper&gt;header&gt;nav|c
+</code></p>
+
+<p>becomes this:
+&#8220;` HTML</p>
+
+<div class="outerWrapper">
+    <div class="innerWrapper">
+        <header>
+            <nav></nav>
+        </header>
+    </div>
+    <!-- /.innerWrapper -->
+  </div>
+
+
+<p>  <!-- /.outerWrapper -->
+<code>
+You can enable this functionality by default so you don't have to to type `|c` all the time by going into `Preferences -&gt; Package Settings -&gt; Emmet -&gt; Settings - User` and adding
+</code> json
+{
+    &ldquo;syntaxProfiles&rdquo;: {
+        &ldquo;html&rdquo; : {
+            &ldquo;filters&rdquo; : &ldquo;html, c&rdquo;
+        }
+    }
+}
+&#8220;`
+Now <a href="https://twitter.com/brnnbrn">Brenna</a> (our teacher) mentioned that she preferred closing comments on the same line as the closing tag. Realizing that I agreed with her I set out to find a way to make that happen, and after a while of searching google I found this <a href="http://iaintnoextra.tumblr.com/post/68089741466/automatically-add-closing-comments-to-html-using-emmet">post</a> by Christopher G. Herbert showing how to do it. All you have to do is add another little bit of JSON to your emmet settings - user file:</p>
+
+<pre><code class="json">{
+    "preferences": {
+        "filter.commentAfter": "&lt;!-- /&lt;%= attr(\"id\", \"#\") %&gt;&lt;%= attr(\"class\", \".\") %&gt; --&gt;"
+    },
+    "syntaxProfiles": {
+        "html" : {
+            "filters" : "html, c"
+        }
+    }
+}
+</code></pre>
+
+<p><a href="http://www.sitepoint.com/faster-workflow-mastering-emmet-part-4/">Now lastly I stumbled across another really neat emmet trick: control + shift + enter</a></p>
+
+<p>If you select a list of items on their own lines like:
+<code>plain
+Home
+About
+Portfolio
+Contact
+</code>
+And then hit Control + Alt + Enter you&rsquo;ll get a little dialog box like you would with Control + W. You can then enter a chain of emmet abbreviations and whichever element you append an <code>*</code> to will be generated around each line. (Click the link above for a beautiful animated gif of it in action).</p>
+
+<p>Now to make things even crazier you can refer to the contents of each line by using <code>$#</code> which makes it possible to do some really crazy stuff if you know what you&rsquo;re doing.</p>
+
+<pre><code class="plain">nav&gt;ul&gt;li[title=$#]*&gt;a[href=$#.html]{$#}&gt;img[src=$#.png alt="$#"].nav-bg
+</code></pre>
+
+<p>becoming
+<code>html
+&lt;nav&gt;
+    &lt;ul&gt;
+        &lt;li title="Home"&gt;
+            &lt;a href="Home.html"&gt;Home
+            &lt;img src="Home.png" alt="Home" class="nav-bg"&gt;
+            &lt;/a&gt;
+        &lt;/li&gt;
+        &lt;li title="About"&gt;
+            &lt;a href="About.html"&gt;About
+            &lt;img src="About.png" alt="About" class="nav-bg"&gt;
+            &lt;/a&gt;
+        &lt;/li&gt;
+        &lt;li title="Portfolio"&gt;
+            &lt;a href="Portfolio.html"&gt;Portfolio
+            &lt;img src="Portfolio.png" alt="Portfolio" class="nav-bg"&gt;
+            &lt;/a&gt;
+        &lt;/li&gt;
+        &lt;li title="Contact"&gt;
+            &lt;a href="Contact.html"&gt;Contact
+            &lt;img src="Contact.png" alt="Contact" class="nav-bg"&gt;
+            &lt;/a&gt;
+        &lt;/li&gt;
+    &lt;/ul&gt;
+&lt;/nav&gt;
+</code>
+is really just kind of nuts, isn&rsquo;t it?</p>
+
+<p>I think I probably spend way too much time fiddling with tools, but it&rsquo;s just so much fun!</p>
+]]></content>
+  </entry>
+  
+</feed>
