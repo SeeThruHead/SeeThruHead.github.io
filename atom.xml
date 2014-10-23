@@ -4,7 +4,7 @@
   <title><![CDATA[From zero to Developer]]></title>
   <link href="http://SeeThruHead.github.io/atom.xml" rel="self"/>
   <link href="http://SeeThruHead.github.io/"/>
-  <updated>2014-09-29T15:53:54-04:00</updated>
+  <updated>2014-10-23T12:38:24-04:00</updated>
   <id>http://SeeThruHead.github.io/</id>
   <author>
     <name><![CDATA[Shane Keulen]]></name>
@@ -14,12 +14,38 @@
 
   
   <entry>
+    <title type="html"><![CDATA[How I Learned to Stop Worrying and Love console.log()]]></title>
+    <link href="http://SeeThruHead.github.io/blog/2014/10/23/how-i-learned-to-stop-worrying-and-love-console-dot-log/"/>
+    <updated>2014-10-23T19:12:48-04:00</updated>
+    <id>http://SeeThruHead.github.io/blog/2014/10/23/how-i-learned-to-stop-worrying-and-love-console-dot-log</id>
+    <content type="html"><![CDATA[<p>When I started the full time bootcamp at HackerYou I thought I was going to be blogging everyday. Or at least multiple times a week. Suffice it to say I underestimated the amount of time and energy I would have left over during the course.</p>
+
+<p>We are just most of the way through week 6 and I must apologize for not having blogged since the end of week 2.</p>
+
+<p>So much has happened! No really, it&rsquo;s weird to say but I know so much more now than I did that I feel like a different person.</p>
+
+<!-- more -->
+
+
+<p>In week three we had to create a responsive website from a PSD template. While technically not too difficult (we made a number of responsive websites in the part time course), the sheer amount of work required to adapt a PSD to a working site was surprising.</p>
+
+<p>In week 4 I had the pleasure of being able to experience pair coding for the first time. My partner (<a href="https://twitter.com/SylviaCreates">@SylviaCreates</a>) and I got our hands dirty with Javascript and jQuery. We learned about binding events as well as DOM creation and manipulation.</p>
+
+<p>Extending on that in week 5 we learned all about Ajax with jQuery. I chose to use the Marvel developer API to grab a timeline of covers from a range of years. To showcase the evolution in art style the comics industry has undergone. You can take a look here: <a href="http://seethruhead.com/week5">Cover Viewer</a>. This was the project that really opened my eyes to the asynchronous nature of Javascript. The ability to make multiple asynchronous requests to an external API and then handle them all on completion is very cool. I&rsquo;m very excited to delve more into the concept of promises very soon. In addition to that, this was also the project that I spent the most time debugging. Multiple hours were spend tracking down the flaws in my logic with my good old friend console.log(). (And console.table, console.info et al.)</p>
+
+<p>As far as tools go (you knew there had to be a tools section right?), I actually didn&rsquo;t have much time over these past few weeks to spend fussing about with tools. I did however find and amazing tool that was almost completely fuss free. I switched from using my own incomplete gulp setup to using Harp, Gulp and BrowserSync as outlined Charlie Gleason in <a href="http://charliegleason.com/articles/harp-gulp-and-browsersync">this amazing blog post.</a>. This took care of all my build side template compilation, all of my preprocessing and all of my live reload and css injection needs. Without a hiccup. I&rsquo;d encourage everyone to give it a try, the guys over at <a href="http://harpjs.com">Harpjs.com</a> have created a uniquely simple to use tool.</p>
+
+<p>Now on that note, I&rsquo;ve got to get back to learning about Prototypal Inheritance. See ya!</p>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[Week 2 at Hackeryou]]></title>
     <link href="http://SeeThruHead.github.io/blog/2014/09/29/week-2-at-hackeryou/"/>
     <updated>2014-09-29T12:51:42-04:00</updated>
     <id>http://SeeThruHead.github.io/blog/2014/09/29/week-2-at-hackeryou</id>
     <content type="html"><![CDATA[<p>Wow, I feel like it&rsquo;s been forever since I&rsquo;ve made a blog post. I guess in the blog world 9 days is an eternity. I had planned to make a couple blog posts last week but I was just too busy cramming new concepts into my head to have time.
-Aside from concept cramming I think the highlight of the week was <a href="http://ladieslearningcode.com/codeday/">Ladies Learning Code</a> National Code day. I spent the day mentoring a class full of eager first time coders. All I can say is that teaching is incredibly rewarding. Knowing you helped make those &lsquo;Eureka&rsquo; moments happen is a really good feeling. I&rsquo;m really grateful to Ladies Learning Code for giving me the opportunity to give something back to the Web Development community.</p>
+Aside from concept cramming I think the highlight of the week was <a href="http://ladieslearningcode.com/codeday/">Ladies Learning Code</a> National Code day. I spent the day mentoring a class full of eager first time coders. All I can say is that teaching is incredibly rewarding. Knowing you helped make those &lsquo;Eureka&rsquo; moments happen is a really good feeling. I&rsquo;m really grateful to Ladies Learning Code for giving me the opportunity to give something back to the Web Development community and I&rsquo;m excited to do it again in October.</p>
 
 <!-- more -->
 
